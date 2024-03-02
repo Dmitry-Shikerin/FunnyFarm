@@ -239,7 +239,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   <AudioSources>k__BackingField:
     _keys: 
     _values: []
+  <AudioSourceView>k__BackingField: {fileID: 0}
 --- !u!114 &510316701
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ namespace Sources.Utils.Serializations
         [SerializeField, HideInInspector] private List<TKey> _keys = new List<TKey>();
         [SerializeField, HideInInspector] private List<TValue> _values = new List<TValue>();
         
-        
         public void OnAfterDeserialize()
         {
             Clear();
@@ -30,6 +29,5 @@ namespace Sources.Utils.Serializations
                 _values.Add(item.Value);
             }
         }
-
     }
 }

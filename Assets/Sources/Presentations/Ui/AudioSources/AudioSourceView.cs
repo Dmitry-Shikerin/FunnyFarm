@@ -1,12 +1,13 @@
-﻿using Sources.Presentations.Views;
+﻿using Sirenix.OdinInspector;
+using Sources.Presentations.Views;
 using UnityEngine;
 
 namespace Sources.Presentations.Ui.AudioSources
 {
-    //Todo добавить валидатор
-    public class AudioSourceView : View
+    public class AudioSourceView : View, ISelfValidator
     {
-        [SerializeField] private AudioSource _audioSource;
+        [Required] [SerializeField]
+        private AudioSource _audioSource;
 
         public void Play() => 
             _audioSource.Play();
@@ -29,5 +30,13 @@ namespace Sources.Presentations.Ui.AudioSources
         public void SetVolume(float volume) => 
             _audioSource.volume = volume;
 
+        //TODO перенести это в отдельный валидатор
+        public void Validate(SelfValidationResult result)
+        {
+            if (_audioSource.clip == null)
+            {
+                result.AddError($"{nameof(AudioSource)} not set AudioClip");
+            }
+        }
     }
 }
