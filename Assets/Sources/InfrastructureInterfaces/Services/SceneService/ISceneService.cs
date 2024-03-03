@@ -6,6 +6,6 @@ namespace Sources.InfrastructureInterfaces.Services.SceneService
 {
     public interface ISceneService : IUpdatable, IFixedUpdatable, ILateUpdatable, IDisable
     {
-        UniTask ChangeSceneAsync(string sceneName, object payload);
+        UniTask ChangeSceneAsync(string sceneName, object payload = null);
     }
 }

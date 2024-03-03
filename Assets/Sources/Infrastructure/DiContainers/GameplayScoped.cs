@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using Sources.Infrastructure.Factories.Scenes;
+using VContainer;
 using VContainer.Unity;
 
 namespace Sources.Infrastructure.DiContainers
@@ -7,6 +8,7 @@ namespace Sources.Infrastructure.DiContainers
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<GameplaySceneFactory>(Lifetime.Singleton);
         }
     }
 }

@@ -37,6 +37,11 @@ namespace Sources.Presentations.Ui.AudioSources
             {
                 result.AddError($"{nameof(AudioSource)} not set AudioClip");
             }
+
+            if (_audioSource.playOnAwake)
+            {
+                result.AddError($"{nameof(AudioSource)} playOnAwake true");
+            }
         }
     }
 }

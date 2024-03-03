@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Reflection;
+using Sources.App.Core;
+using Sources.Infrastructure.Factories.App;
 using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private AppCore _appCore;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _appCore = FindObjectOfType<AppCore>() ?? new AppCoreFactory().Create();
     }
 }
