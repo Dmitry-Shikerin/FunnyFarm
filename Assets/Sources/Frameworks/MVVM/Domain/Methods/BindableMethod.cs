@@ -15,9 +15,7 @@ namespace Sources.Frameworks.MVVM.Domain.Methods
         }
 
         //TODO что здесь происходит?
-        public void Invoke(params object[] args)
-        {
+        public void Invoke(params object[] args) => 
             _methodInfo?.Invoke(_target, args);
-        }
     }
 }
