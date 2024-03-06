@@ -10,27 +10,24 @@ namespace Sources.Frameworks.MVVM.Infrastructure.Builders
     {
         private readonly IBindableViewFactory _bindableViewFactory;
         private readonly IViewModelFactory<TViewModel> _viewModelFactory;
-        private readonly string _viewPath;
 
         //TODO хочется убрать отсюда зависимость на стринг
         public BindableViewBuilder
         (
             IBindableViewFactory bindableViewFactory,
-            IViewModelFactory<TViewModel> viewModelFactory,
-            string viewPath
+            IViewModelFactory<TViewModel> viewModelFactory
         )
         {
             _bindableViewFactory = bindableViewFactory ??
                                    throw new ArgumentNullException(nameof(bindableViewFactory));
             _viewModelFactory = viewModelFactory ??
                                 throw new ArgumentNullException(nameof(viewModelFactory));
-            _viewPath = viewPath ?? throw new ArgumentNullException(nameof(viewPath));
         }
 
-        public IBindableView Build(int entityId, string prefabName, IBindableView parent = null)
+        public IBindableView Build(int entityId, string viewPath,string prefabName, IBindableView parent = null)
         {
             IViewModel viewModel = _viewModelFactory.Create(entityId);
-            IBindableView view = _bindableViewFactory.Create(_viewPath, prefabName);
+            IBindableView view = _bindableViewFactory.Create(viewPath, prefabName);
             
             view.Bind(viewModel);
 

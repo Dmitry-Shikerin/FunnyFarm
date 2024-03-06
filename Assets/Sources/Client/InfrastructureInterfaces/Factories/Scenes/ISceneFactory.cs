@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Sources.ControllersInterfaces.Scenes;
 
-namespace Sources.Infrastructure.Factories.Scenes
+namespace Sources.Client.InfrastructureInterfaces.Factories.Scenes
 {
     public interface ISceneFactory
     {

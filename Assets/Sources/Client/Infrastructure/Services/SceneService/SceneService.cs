@@ -4,7 +4,9 @@ using Cysharp.Threading.Tasks;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.StateMachines.SceneStateMachine;
 using Sources.InfrastructureInterfaces.Services.SceneService;
+using UnityEngine;
 using VContainer.Unity;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Services.SceneService
@@ -15,11 +17,11 @@ namespace Sources.Infrastructure.Services.SceneService
         private readonly List<Func<UniTask>> _exitingHandlers = new List<Func<UniTask>>();
 
         private readonly SceneStateMachine _stateMachine;
-        private readonly IReadOnlyDictionary<string, Func<object, LifetimeScope, UniTask<IScene>>> _sceneFactories;
+        private readonly IReadOnlyDictionary<string, Func<object, SceneContext, UniTask<IScene>>> _sceneFactories;
 
         public SceneService
         (
-            IReadOnlyDictionary<string, Func<object, LifetimeScope, UniTask<IScene>>> sceneFactories
+            IReadOnlyDictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories
         )
         {
             _stateMachine = new SceneStateMachine();
@@ -41,15 +43,15 @@ namespace Sources.Infrastructure.Services.SceneService
         public async UniTask ChangeSceneAsync(string sceneName, object payload)
         {
             if (_sceneFactories.TryGetValue(sceneName, out
-                    Func<object, LifetimeScope, UniTask<IScene>> sceneFactory) == false)
+                    Func<object, SceneContext, UniTask<IScene>> sceneFactory) == false)
                 throw new InvalidOperationException(nameof(sceneName));
 
             foreach (Func<string, UniTask> enteringHandler in _enteringHandlers)
                 await enteringHandler.Invoke(sceneName);
 
-            LifetimeScope lifetimeScope = Object.FindObjectOfType<LifetimeScope>();
+            SceneContext sceneContext = Object.FindObjectOfType<SceneContext>();
 
-            IScene scene = await sceneFactory.Invoke(payload, lifetimeScope);
+            IScene scene = await sceneFactory.Invoke(payload, sceneContext);
 
             _stateMachine.ChangeState(scene, payload);
 

@@ -1,6 +1,6 @@
 using System.Reflection;
 using Sources.App.Core;
-using Sources.Infrastructure.Factories.App;
+using Sources.Client.Infrastructure.Factories.App;
 using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour

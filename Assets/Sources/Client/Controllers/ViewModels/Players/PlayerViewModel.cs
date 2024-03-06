@@ -11,12 +11,10 @@ namespace Sources.Client.Controllers.ViewModels.Players
 
         protected override void OnEnable()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void OnDisable()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

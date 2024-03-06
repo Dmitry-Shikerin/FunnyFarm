@@ -4,7 +4,7 @@
     public class IdGenerator : IIdGenerator
     {
         private int _currentId;
-
+        
         public IdGenerator(int startId)
         {
             _currentId = startId;
