@@ -14,20 +14,14 @@ namespace Sources.Frameworks.MVVM.Presentation.Views
         
         private Action AfterUnbindCallback { get; set; }
 
-        //TODO Для чего это?
-        //TODO вот здесь выключается а где должно включатся?
         private void Awake() => 
             gameObject.SetActive(false);
 
-        //TODO все эти методы должны быть публичными?
         public void Bind(IViewModel viewModel)
         {
             _viewModel = viewModel;
             Binder.Bind(this, viewModel);
             viewModel.Enable();
-            
-            //TODO Решил включать здесь. Нормально?
-            gameObject.SetActive(true);
         }
 
         public void Unbind()

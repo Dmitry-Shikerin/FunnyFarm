@@ -14,10 +14,13 @@ namespace Sources.Client.Infrastructure.Factories.Controllers.ViewModels
         private readonly CharacterControllerMovementViewModelComponentFactory
             _characterControllerMovementViewModelComponentFactory;
 
+        private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
+
         public PlayerViewModelFactory
         (
             LookDirectionViewModelComponentFactory lookDirectionViewModelComponentFactory,
-            CharacterControllerMovementViewModelComponentFactory characterControllerMovementViewModelComponentFactory
+            CharacterControllerMovementViewModelComponentFactory characterControllerMovementViewModelComponentFactory,
+            VisibilityViewModelComponentFactory visibilityViewModelComponentFactory
         )
         {
             _lookDirectionViewModelComponentFactory =
@@ -26,6 +29,7 @@ namespace Sources.Client.Infrastructure.Factories.Controllers.ViewModels
             _characterControllerMovementViewModelComponentFactory =
                 characterControllerMovementViewModelComponentFactory
                 ?? throw new ArgumentNullException(nameof(characterControllerMovementViewModelComponentFactory));
+            _visibilityViewModelComponentFactory = visibilityViewModelComponentFactory ?? throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
         }
 
         public IViewModel Create(int id)
@@ -35,7 +39,8 @@ namespace Sources.Client.Infrastructure.Factories.Controllers.ViewModels
                 new IViewModelComponent[]
                 {
                     _lookDirectionViewModelComponentFactory.Create(id),
-                    _characterControllerMovementViewModelComponentFactory.Create(id)
+                    _characterControllerMovementViewModelComponentFactory.Create(id),
+                    _visibilityViewModelComponentFactory.Create(id)
                 }
             );
         }

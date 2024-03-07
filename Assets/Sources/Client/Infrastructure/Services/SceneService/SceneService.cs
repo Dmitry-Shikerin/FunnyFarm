@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Sources.Client.Infrastructure.StateMachines.SceneStateMachine;
 using Sources.ControllersInterfaces.Scenes;
-using Sources.Infrastructure.StateMachines.SceneStateMachine;
 using Sources.InfrastructureInterfaces.Services.SceneService;
 using Zenject;
 using Object = UnityEngine.Object;

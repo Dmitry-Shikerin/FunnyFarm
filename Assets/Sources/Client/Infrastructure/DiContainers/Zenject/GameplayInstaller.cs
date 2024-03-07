@@ -17,6 +17,7 @@ using Sources.Client.InfrastructureInterfaces.Services.InputServices;
 using Sources.Client.UseCases.Common.Components.LookDirection.Commands;
 using Sources.Client.UseCases.Common.Components.Positions.Commands;
 using Sources.Client.UseCases.Common.Components.Speeds.Commands;
+using Sources.Client.UseCases.Common.Components.Visibilities.Queries;
 using Sources.Client.UseCases.Queries.Players;
 using Sources.Frameworks.MVVM.Infrastructure.Builders;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces.Builders;
@@ -49,13 +50,17 @@ namespace Sources.Client.Infrastructure.DiContainers.Zenject
 
             Container.Bind<ISignalBus>().To<SignalBus>().AsSingle();
             Container.BindInterfacesAndSelfTo<SignalHandler>().AsSingle();
+
+            //TODO зарегистрировать все Запросы
+            Container.Bind<GetVisibilityQuery>().AsTransient();
             
             Container.Bind<MovePositionCommand>().AsTransient();
             Container.Bind<SetLookDirectionCommand>().AsTransient();
             Container.Bind<SetSpeedCommand>().AsTransient();
 
-            Container.Bind<LookDirectionViewModelComponentFactory>().AsTransient();
-            Container.Bind<CharacterControllerMovementViewModelComponentFactory>().AsTransient();
+            Container.Bind<LookDirectionViewModelComponentFactory>().AsSingle();
+            Container.Bind<CharacterControllerMovementViewModelComponentFactory>().AsSingle();
+            Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
 
             BindPlayer();
         }

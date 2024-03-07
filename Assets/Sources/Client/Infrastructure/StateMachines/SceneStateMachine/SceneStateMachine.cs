@@ -2,7 +2,7 @@
 using Sources.InfrastructureInterfaces.Services.Updates;
 using Sources.InfrastructureInterfaces.StateMachines.SceneStateMachines.States;
 
-namespace Sources.Infrastructure.StateMachines.SceneStateMachine
+namespace Sources.Client.Infrastructure.StateMachines.SceneStateMachine
 {
     public class SceneStateMachine : IUpdatable, ILateUpdatable, IFixedUpdatable, IExitable
     {
