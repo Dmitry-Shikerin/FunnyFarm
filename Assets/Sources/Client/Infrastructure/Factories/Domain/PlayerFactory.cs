@@ -11,6 +11,7 @@ namespace Sources.Client.Infrastructure.Factories.Domain
         {
             Player player = new Player(id);
 
+            player.AddComponent(new VisibilityComponent(true));
             player.AddComponent(new LookDirectionComponent(Vector3.zero));
             player.AddComponent(new PositionComponent(spawnPosition));
             player.AddComponent(new SpeedComponent(10f)); //TODO вынести в конфиг

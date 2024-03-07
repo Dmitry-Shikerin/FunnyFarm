@@ -1,6 +1,5 @@
 ﻿using System;
 using Sources.Client.Controllers.Signals.Players;
-using Sources.Client.Domain.Players;
 using Sources.Client.Infrastructure.Factories.Controllers.SignalControllers;
 using Sources.Client.Infrastructure.Services.IdGenerators;
 using Sources.Frameworks.SignalBuses.Implementation;
@@ -39,7 +38,7 @@ namespace Sources.Client.Infrastructure.Factories.Views.Scenes
             //TODO если список то прогнать форичем
             _signalHandlerRegisterer.Register(playerSignalController);
             
-            _signalBus.Handle(new CreatePlayerSignal(new Vector3(0,1,0)));
+            _signalBus.Handle(new CreatePlayerSignal(new Vector3(0,0,0)));
         }
     }
 }

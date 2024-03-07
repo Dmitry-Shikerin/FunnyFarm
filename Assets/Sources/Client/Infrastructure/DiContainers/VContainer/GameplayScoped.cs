@@ -1,7 +1,9 @@
-﻿using Sources.Client.Controllers.ViewModels;
+﻿using Sources.Client.Controllers.Actions.Players;
+using Sources.Client.Controllers.ViewModels;
 using Sources.Client.Controllers.ViewModels.Players;
 using Sources.Client.Infrastructure.Factories.Controllers.SignalControllers;
 using Sources.Client.Infrastructure.Factories.Controllers.ViewModels;
+using Sources.Client.Infrastructure.Factories.Controllers.ViewModels.Components;
 using Sources.Client.Infrastructure.Factories.Domain;
 using Sources.Client.Infrastructure.Factories.Scenes;
 using Sources.Client.Infrastructure.Factories.Services;
@@ -16,8 +18,12 @@ using Sources.Client.InfrastructureInterfaces.Repositories;
 using Sources.Client.InfrastructureInterfaces.Services.CurrentPlayers;
 using Sources.Client.InfrastructureInterfaces.Services.InputServices;
 using Sources.Client.InfrastructureInterfaces.Services.MovementServices;
+using Sources.Client.UseCases.Common.Components.LookDirection.Commands;
+using Sources.Client.UseCases.Common.Components.Positions.Commands;
 using Sources.Client.UseCases.Common.Components.Positions.Queries;
+using Sources.Client.UseCases.Common.Components.Speeds.Commands;
 using Sources.Client.UseCases.Common.Components.Speeds.Queries;
+using Sources.Client.UseCases.Queries.Players;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces.Builders;
 using Sources.Frameworks.MVVM.Presentation.Binders;
 using Sources.Frameworks.MVVM.Presentation.Factories;
@@ -35,15 +41,13 @@ namespace Sources.Client.Infrastructure.DiContainers
         protected override void Configure(IContainerBuilder builder)
         {
             //TODO потестить VContainer
+            builder.Register<GameplaySceneFactory>(Lifetime.Singleton);
+            builder.Register<GamePlaySceneViewFactory>(Lifetime.Singleton);
+
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
-            // builder.Register<IPlayerMovementService, PlayerMovementService>(Lifetime.Singleton);
-            builder.Register<PlayerMovementServiceFactory>(Lifetime.Singleton);
 
             builder.Register<IEntityRepository, EntityRepository>(Lifetime.Singleton);
-            builder.Register<IIdGenerator, IdGenerator>(Lifetime.Singleton);
-
-            builder.Register<GamePlaySceneViewFactory>(Lifetime.Singleton);
-            builder.Register<GameplaySceneFactory>(Lifetime.Singleton);
+            builder.RegisterInstance<IIdGenerator, IdGenerator>(new IdGenerator(10));
 
             builder.Register<IBinder, Binder>(Lifetime.Singleton);
             builder.Register<IBindableViewFactory, BindableViewFactory>(Lifetime.Singleton);
@@ -54,23 +58,36 @@ namespace Sources.Client.Infrastructure.DiContainers
                 .AsImplementedInterfaces()
                 .AsSelf();
 
-            //TODO сработает ли?
+            builder.Register<MovePositionCommand>(Lifetime.Transient);
+            builder.Register<SetLookDirectionCommand>(Lifetime.Transient);
+            builder.Register<SetSpeedCommand>(Lifetime.Transient);
+
+            builder.Register<LookDirectionViewModelComponentFactory>(Lifetime.Transient);
+            builder.Register<CharacterControllerMovementViewModelComponentFactory>(Lifetime.Transient);
+            
+            RegisterPlayer(builder);
+        }
+
+        private void RegisterPlayer(IContainerBuilder builder)
+        {
+            builder.Register<PlayerMovementServiceFactory>(Lifetime.Singleton);
+
             builder
                 .Register<CurrentPlayerService>(Lifetime.Singleton)
                 .AsImplementedInterfaces()
                 .AsSelf();
-            //TODO или
-            // builder.Register<CurrentPlayerService>(Lifetime.Singleton).As<ICurrentPlayerService>();
 
             builder.Register<IPlayerFactory, PlayerFactory>(Lifetime.Singleton);
             builder.Register<IViewModelFactory<PlayerViewModel>,
                 PlayerViewModelFactory>(Lifetime.Singleton);
 
             builder.Register<PlayerSignalControllerFactory>(Lifetime.Singleton);
+            builder.Register<CreateCurrentCharacterQuery>(Lifetime.Singleton);
 
-            //TODO будут ли это новые экземпляры?
-            // builder.Register<GetPositionQuery>(Lifetime.Transient);
-            // builder.Register<GetSpeedQuery>(Lifetime.Transient);
+            builder.Register<CreatePlayerSignalAction>(Lifetime.Transient);
+            builder.Register<PlayerMoveSignalAction>(Lifetime.Transient);
+            builder.Register<PlayerRotateSignalAction>(Lifetime.Transient);
+            builder.Register<PlayerSpeedSignalAction>(Lifetime.Transient);
         }
     }
 }

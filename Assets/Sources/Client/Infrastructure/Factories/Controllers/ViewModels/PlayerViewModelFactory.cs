@@ -1,6 +1,4 @@
 ﻿using System;
-using Sources.Client.Controllers.ViewModels;
-using Sources.Client.Controllers.ViewModels.Components;
 using Sources.Client.Controllers.ViewModels.Players;
 using Sources.Client.Infrastructure.Factories.Controllers.ViewModels.Components;
 using Sources.Frameworks.MVVM.ControllersInterfaces;

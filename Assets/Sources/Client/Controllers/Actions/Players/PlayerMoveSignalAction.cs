@@ -2,7 +2,6 @@
 using Sources.Client.Controllers.Signals.Players;
 using Sources.Client.InfrastructureInterfaces.Services.CurrentPlayers;
 using Sources.Client.UseCases.Common.Components.Positions.Commands;
-using Sources.Frameworks.SignalBuses.Interfaces.Actions;
 using Sources.Frameworks.SignalBuses.Interfaces.Actions.Generic;
 
 namespace Sources.Client.Controllers.Actions.Players
