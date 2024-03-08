@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Sources.Client.InfrastructureInterfaces.StateMachines.ContextStateMachines.Contexts;
+using UnityEngine;
 
 namespace Sources.Client.Domain.Dtos
 {
-    public class PlayerInput
+    public class PlayerInput : IContext
     {
         public PlayerInput(Vector3 direction)
         {

@@ -29,13 +29,9 @@ namespace Sources.Client.UseCases.Queries.Players
         {
             int id = _idGenerator.GetId();
             
-            Debug.Log($"IdGenerator get player Id {id}");
-
             Player player = _playerFactory.Create(id, spawnPosition);
             _entityRepository.Add(player);
             
-            Debug.Log($"Player Id {id}");
-
             return id;
         }
     }

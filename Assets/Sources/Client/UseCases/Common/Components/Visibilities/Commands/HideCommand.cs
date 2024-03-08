@@ -10,6 +10,6 @@ namespace Sources.Client.UseCases.Common.Components.Visibilities.Commands
         }
 
         public void Handle(int id) => 
-            GetComponent(id).Show();
+            GetComponent(id).Hide();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Sources.App.Core;
+using Sources.Client.App.Core;
 using Sources.Client.Infrastructure.Factories.Scenes;
 using Sources.Client.Infrastructure.Services.SceneService;
 using Sources.Controllers.Scenes;

@@ -4,7 +4,7 @@ using Sources.Client.InfrastructureInterfaces.Repositories;
 using Sources.Client.UseCases.Common.Components.Visibilities.Queries;
 using Sources.Frameworks.MVVM.ControllersInterfaces.Components;
 
-namespace Sources.Client.Infrastructure.Factories.Controllers.ViewModels.Components
+namespace Sources.Client.Infrastructure.Factories.Controllers.ViewModels.Components.Common
 {
     public class VisibilityViewModelComponentFactory
     {

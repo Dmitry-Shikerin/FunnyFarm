@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Frameworks.MVVM.ControllersInterfaces;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces.Builders;
+using Sources.Frameworks.MVVM.Presentation.Views;
 using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
 using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 
@@ -24,10 +25,20 @@ namespace Sources.Frameworks.MVVM.Infrastructure.Builders
                                 throw new ArgumentNullException(nameof(viewModelFactory));
         }
 
-        public IBindableView Build(int entityId, string viewPath,string prefabName, IBindableView parent = null)
+        public IBindableView Build(int entityId, string viewPath, string prefabName, IBindableView parent = null)
         {
             IViewModel viewModel = _viewModelFactory.Create(entityId);
             IBindableView view = _bindableViewFactory.Create(viewPath, prefabName);
+            
+            view.Bind(viewModel);
+
+            return view;
+        }
+        
+        public IBindableView Build(int entityId, BindableView bindableView, IBindableView parent = null)
+        {
+            IViewModel viewModel = _viewModelFactory.Create(entityId);
+            IBindableView view = _bindableViewFactory.Create(bindableView);
             
             view.Bind(viewModel);
 

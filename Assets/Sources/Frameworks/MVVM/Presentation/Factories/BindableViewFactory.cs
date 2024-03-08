@@ -33,6 +33,15 @@ namespace Sources.Frameworks.MVVM.Presentation.Factories
             return view;
         }
 
+        public IBindableView Create(BindableView view, IBindableView parent = null)
+        {
+            Construct(view);
+            
+            view.SetParent(parent);
+
+            return view;
+        }
+
         private void Construct(BindableView view)
         {
             //TODO для чего констрак в биндейблВью публичный если мы его берем через рефлекси?

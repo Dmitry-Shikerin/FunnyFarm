@@ -3,7 +3,7 @@ using Sources.InfrastructureInterfaces.Services.SceneService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Sources.App.Core
+namespace Sources.Client.App.Core
 {
     public class AppCore : MonoBehaviour
     {

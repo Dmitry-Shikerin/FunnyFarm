@@ -1,5 +1,5 @@
 using System.Reflection;
-using Sources.App.Core;
+using Sources.Client.App.Core;
 using Sources.Client.Infrastructure.Factories.App;
 using UnityEngine;
 
